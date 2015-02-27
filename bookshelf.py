@@ -1,3 +1,6 @@
+# This is shit-code, kids
+# Don't try it at home!
+
 import os
 
 from flask import Flask
@@ -29,7 +32,7 @@ class ARole(db.Model):
     __tablename__ = "roles"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
-    users = db.relationship("User", backref="role")
+    users = db.relationship("AnUser", backref="role", lazy="dynamic")
 
     def __repr__(self):
         return "<ARole %r>" % self.name
@@ -48,9 +51,16 @@ def Index():
     name = None
     form = NameForm()
     if form.validate_on_submit():
-        old_name = session.get("name")
-        if old_name is not None and old_name != form.name.data:
-            flash("Looks like you have changed your name!")
+        user = AnUser.query.filter_by(username=form.name.data).first()
+        if user is None:
+            user = AnUser(username=form.name.data)
+            db.session.add(user)
+            db.session.commit()
+            session["known"] = False
+            flash("Unknown user")
+        else:
+            session["known"] = True
+            flash("Known user")
         session["name"] = form.name.data
         form.name.data = ""
         return redirect(url_for("Index"))
