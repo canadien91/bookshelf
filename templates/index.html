@@ -5,6 +5,16 @@
     <style></style>
 {% endblock %}
 
-{% block body %}
-    <h1>Hello, World!</h1>
+{% block content%}
+    <h3>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h3>
+    <form action="" method="post" name="login">
+        {{ form.hidden_tag() }}
+        <p>
+            Please, enter your name: <br>
+            {{ form.name(size=80) }} <br>
+        </p>
+        <p>
+            {{ form.submit }}
+        </p>
+    </form>
 {% endblock %}
