@@ -9,11 +9,20 @@
     {% endblock %}
 </Head>
 <Body>
-    {% block navbar %}
-        BookShelf
-    {% endblock %}
 
-    {% block content %}
-    {% endblock %}
+{% block navbar %}
+    BookShelf
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% block page_content %}{% endblock %}
+{% endblock %}
+
 </Body>
+
 </HTML>
