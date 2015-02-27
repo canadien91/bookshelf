@@ -10,6 +10,8 @@ from flask import flash
 from flask.ext.script import Manager
 from flask.ext.wtf import Form
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.script import Shell
+from flask.ext.migrate import Migrate, MigrateCommand
 
 from wtforms import StringField, SubmitField
 from wtforms.validators import Required
@@ -27,6 +29,7 @@ app.config["SQLALCHEMY_COMMIT_ON_TEARDOWN"] = True
 
 db = SQLAlchemy(app)
 manager = Manager(app)
+migrate = Migrate(app, db)
 
 class ARole(db.Model):
     __tablename__ = "roles"
@@ -57,18 +60,30 @@ def Index():
             db.session.add(user)
             db.session.commit()
             session["known"] = False
-            flash("Unknown user")
+            # flash("Unknown user")
         else:
             session["known"] = True
-            flash("Known user")
+            # flash("Known user")
         session["name"] = form.name.data
         form.name.data = ""
         return redirect(url_for("Index"))
-    return render_template("index.html", form=form, name=session.get("name"))
+    return render_template(
+        "index.html", 
+        form=form, 
+        name=session.get("name"), 
+        known=session.get("known", False)
+    )
 
-@app.route("/user/<name>")
-def User(name):
-    return render_template("user.html", name=name)
+def make_shell_context():
+    return dict(
+        app=app,
+        db=db,
+        AnUser=AnUser,
+        ARole=ARole
+    )
+
+manager.add_command( "shell", Shell( make_context=make_shell_context ) )
+manager.add_command("db", MigrateCommand)
 
 if __name__ == '__main__':
     manager.run()
