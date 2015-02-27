@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request, render_template
+from flask import request, render_template, session, redirect, url_for
 
 from flask.ext.script import Manager
 from flask.ext.wtf import Form
@@ -21,9 +21,9 @@ def Index():
     name = None
     form = NameForm()
     if form.validate_on_submit():
-        name = form.name.data
-        form.name.data = ""
-    return render_template("index.html", form=form, name=name)
+        session["name"] = form.name.data
+        return redirect(url_for("Index"))
+    return render_template("index.html", form=form, name=session.get("name"))
 
 @app.route("/user/<name>")
 def User(name):
