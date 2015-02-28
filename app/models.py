@@ -27,31 +27,19 @@ class AnUser( UserMixin, db.Model ):
     role_id         = db.Column( db.Integer, db.ForeignKey( "roles.id" ) )
 
     @property
-    def password(self):
-        raise AttributeError("Password is not a readable attribute")
+    def password( self ):
+        raise AttributeError( "Password is not a readable attribute" )
 
     @password.setter
-    def password(self, password):
-        self.password_hash = generate_password_hash(password)
+    def password( self, password ):
+        self.password_hash = generate_password_hash( password )
 
-    def verify_password(self, password):
-        return check_password_hash(self.password_hash, password)
-
-    # def is_authenticated(self):
-    #     return True
-
-    # def is_active(self):
-    #     return True
-
-    # def is_anonimous(self):
-    #     return False
-
-    # def get_id(self):
-    #     return str(self.id)
+    def VerifyPassword( self, password ):
+        return check_password_hash( self.password_hash, password )
 
     def __repr__(self):
         return "<AnUser %r>" % self.username
 
 @login_manager.user_loader
-def LoadUser(user_id):
-    return AnUser.query.get(int(user_id))
+def LoadUser( user_id ):
+    return AnUser.query.get( int( user_id ) )

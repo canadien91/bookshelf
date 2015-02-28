@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Registration{% endblock %}
 
 {% block page_content %}
-    <div>
-        <h1>Login</h1>
-    </div>
-    <div>
-        <form action="" method="post" name="login">
+    <h1>
+        Registration
+    </h1>
+
+    <form action="" method="post" name="login">
             {{ form.hidden_tag() }}
             <p>
                 Please, enter your name: <br>
@@ -17,17 +17,11 @@
                 {{ form.password }}
             </p>
             <p>
-                {{ form.remember_me }}
+                {{ form.confirm_passwd }}
             </p>
             <p>
                 {{ form.submit }}
             </p>
         </form>
-        <p>
-            New user?
-            <a href="{{ url_for('auth.Register') }}">
-                Click here to register
-            </a>
-        </p>
-    </div>
+    
 {% endblock %}
