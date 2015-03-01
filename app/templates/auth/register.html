@@ -3,25 +3,59 @@
 {% block title %}Registration{% endblock %}
 
 {% block page_content %}
-    <h1>
-        Registration
-    </h1>
 
+<div class="grid_16">
+    <h3>
+        Please, <span class="greentext">Sign Up</span>.
+    </h3>
+    <p>
+        So far, registration is the only way to the realm of <span class="greentext">bookworms</span>.
+    </p>
+</div>
+<div class="grid_16 well">
     <form action="" method="post" name="login">
-            {{ form.hidden_tag() }}
-            <p>
-                Please, enter your name: <br>
-                {{ form.username(size=80) }} <br>
-            </p>
-            <p>
+        {{ form.hidden_tag() }}
+        <div class="container_16 form-row">   
+            <div class="grid_2 {% if form.username.errors %}error{% endif %}">
+                Username:                
+            </div>
+            <div class="grid_7">
+                {{ form.username }}
+            </div>
+            <div class="grid_7">
+                {% for error in form.username.errors %}
+                    <span class="error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container_16 form-row">
+            <div class="grid_2 {% if form.password.errors %}error{% endif %}">
+                Password:                
+            </div>
+            <div class="grid_7">
                 {{ form.password }}
-            </p>
-            <p>
+            </div>
+            <div class="grid_7">
+                {% for error in form.password.errors %}
+                    <span class="error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container_16 form-row">
+            <div class="grid_2 {% if form.password.errors %}error{% endif %}">
+                Confirm:                
+            </div>
+            <div class="grid_7">
                 {{ form.confirm_passwd }}
-            </p>
-            <p>
-                {{ form.submit }}
-            </p>
-        </form>
+            </div>
+            <div class="grid_7">
+                {% for error in form.confirm_passwd.errors %}
+                    <span class="error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="grid_3 form-row">{{ form.submit }}</div>
+    </form>
+</div>
     
 {% endblock %}

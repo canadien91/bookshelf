@@ -6,10 +6,19 @@
 {% endblock %}
 
 {% block page_content %}
+<p>    
     Hello,
     {% if current_user.is_authenticated() %}
-        {{ current_user.username }}
+        <span class="greentext">
+            {{ current_user.username }}!
+        </span>
     {% else %}
-        Stranger
-    {% endif %}!
+        <span class="greentext">
+            Stranger!
+        </span>
+    {% endif %}
+</p>
+<p>
+    <span class="greentext">Today</span> is a <span class="greentext">good</span> day!
+</p>
 {% endblock %}

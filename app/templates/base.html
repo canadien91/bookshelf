@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 
 <HTML>
 <Head>
@@ -6,19 +6,39 @@
         <title>{% block title %}{% endblock %} | BookShelf</title>
         <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='960.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='master.css') }}">
+        <meta charset="utf-8">
     {% endblock %}
 </Head>
-<Body>
 
+<Body class="container_16">
 {% block navbar %}
-    BookShelf
-    <ul>
-        {% if current_user.is_authenticated() %}
-            <li><a href="{{ url_for('auth.Logout') }}">Sign Out</a></li>
-        {% else %}
-            <li><a href="{{ url_for('auth.Login') }}">Sign In</a></li>
-        {% endif %}
-    </ul>
+<div id="navbar">
+    <div id="logo" class="grid_3">
+        <a href="{{ url_for('main.Index') }}">[B]OOKSHELF</a>
+    </div>
+    <div class="grid_2 navbar-item">
+        <a href="#" class="link">Authors</a>
+    </div>
+    <div class="grid_2 navbar-item">
+        <a href="#" class="link">Books</a>
+    </div>
+
+    {% if current_user.is_authenticated() %}
+        <div class="grid_2 navbar-item">
+            <a href="#" class="link">Diary</a>
+        </div>
+        <div class="grid_4 push_3 navbar-in-out">    
+            <a href="{{ url_for('auth.Logout') }}" class="link">Sign Out</a>
+            [{{ current_user.username }}]    
+        </div>
+    {% else %}
+        <div class="grid_2 push_7 navbar-in-out">
+            <a href="{{ url_for('auth.Login') }}" class="link">Sign In</a>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}
 
 {% block content %}

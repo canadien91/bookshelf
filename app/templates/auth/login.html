@@ -2,32 +2,55 @@
 
 {% block title %}Login{% endblock %}
 
+
 {% block page_content %}
-    <div>
-        <h1>Login</h1>
-    </div>
-    <div>
-        <form action="" method="post" name="login">
-            {{ form.hidden_tag() }}
-            <p>
-                Please, enter your name: <br>
-                {{ form.username(size=80) }} <br>
-            </p>
-            <p>
+
+<div class="grid_16">
+    <h3>Please, <span class="greentext">Sign In</span>.</h3>
+</div>
+<div class="grid_16 well">
+    <form action="" method="post" name="login">
+        {{ form.hidden_tag() }}
+        <div class="container_16 form-row">   
+            <div class="grid_2 {% if form.username.errors %}error{% endif %}">
+                Username:                
+            </div>
+            <div class="grid_7">
+                {{ form.username }}
+            </div>
+            <div class="grid_7">
+                {% for error in form.username.errors %}
+                    <span class="error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container_16 form-row">
+            <div class="grid_2 {% if form.password.errors %}error{% endif %}">
+                Password:                
+            </div>
+            <div class="grid_7">
                 {{ form.password }}
-            </p>
-            <p>
-                {{ form.remember_me }}
-            </p>
-            <p>
-                {{ form.submit }}
-            </p>
-        </form>
-        <p>
-            New user?
-            <a href="{{ url_for('auth.Register') }}">
-                Click here to register
-            </a>
-        </p>
-    </div>
+            </div>
+            <div class="grid_7">
+                {% for error in form.password.errors %}
+                    <span class="error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="grid_16 form-row">
+            {{ form.remember_me }} Remember <span class="greentext">me</span>
+        </div>
+        <div class="container_16 form-row">
+            <div class="grid_3">{{ form.submit }}</div>
+        </div>
+    </form>
+</div>
+<div class="grid_16">
+    <p>
+        New user?
+        <a href="{{ url_for('auth.Register') }}" class="greenlink">
+            Click here to register
+        </a>
+    </p>
+</div>
 {% endblock %}
