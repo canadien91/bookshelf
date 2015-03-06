@@ -3,7 +3,7 @@
 import os
 
 from app                import create_app, db
-from app.models         import AnUser, ARole
+from app.models         import AnUser, ARole, AnAuthor, APublication
 
 from flask.ext.script   import Manager, Shell
 from flask.ext.migrate  import Migrate, MigrateCommand
@@ -17,7 +17,9 @@ def MakeShellContext():
         app=app,
         db=db,
         AnUser=AnUser,
-        ARole=ARole
+        ARole=ARole,
+        AnAuthor=AnAuthor,
+        APublication=APublication
 )
 
 manager.add_command( "shell", Shell( make_context=MakeShellContext ) )

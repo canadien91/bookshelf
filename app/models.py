@@ -1,5 +1,7 @@
 # coding: utf-8
 
+from datetime           import datetime
+
 from flask.ext.login    import UserMixin
 
 from werkzeug.security  import generate_password_hash
@@ -7,6 +9,12 @@ from werkzeug.security  import check_password_hash
 
 from .                  import db
 from .                  import login_manager
+
+authorship = db.Table(
+    "authorship",
+    db.Column( "author_id", db.Integer, db.ForeignKey( "authors.id" ) ),
+    db.Column( "publication_id", db.Integer, db.ForeignKey( "publications.id" ) )
+)
 
 class ARole( db.Model ):
     __tablename__   = "roles"
@@ -37,8 +45,45 @@ class AnUser( UserMixin, db.Model ):
     def VerifyPassword( self, password ):
         return check_password_hash( self.password_hash, password )
 
-    def __repr__(self):
+    def __repr__( self ):
         return "<AnUser %r>" % self.username
+
+class AnAuthor( db.Model ):
+    __tablename__   = "authors"
+    id              = db.Column( db.Integer, primary_key=True )
+    added           = db.Column( db.DateTime, default=datetime.utcnow() )
+
+    first_name      = db.Column( db.String( 64 ) )
+    second_name     = db.Column( db.String( 64 ), nullable=True )
+    third_name      = db.Column( db.String( 64 ), nullable=True )
+    last_name       = db.Column( db.String( 64 ), index=True, default="Tolkien" )
+
+    birth_day       = db.Column( db.DateTime )
+    death_day       = db.Column( db.DateTime, nullable=True )
+
+    bio             = db.Column( db.Text, nullable=True )
+
+    publications    = db.relationship(
+        "APublication",
+        secondary=authorship,
+        backref=db.backref( "authors", lazy="dynamic" )
+    )
+
+    def __repr__( self ):
+        return "<Author %s. %s>" % ( self.first_name[ 0 ], self.last_name )
+
+
+class APublication( db.Model ):
+    __tablename__   = "publications"
+
+    id              = db.Column( db.Integer, primary_key=True )
+    added           = db.Column( db.DateTime, default=datetime.utcnow() )
+
+    title           = db.Column( db.String( 128 ), index=True, default="No Title" )
+    annotation      = db.Column( db.Text, nullable=True )
+
+    def __repr__( self ):
+        return "<Publication #%i. %r>" % ( self.id, self.title )
 
 @login_manager.user_loader
 def LoadUser( user_id ):
