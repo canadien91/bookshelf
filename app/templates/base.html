@@ -19,23 +19,23 @@
         <a href="{{ url_for('main.Index') }}">[B]OOKSHELF</a>
     </div>
     <div class="grid_2 navbar-item">
-        <a href="#" class="link">Authors</a>
+        <a href="{{ url_for('authors.Index') }}" class="link">authors</a>
     </div>
     <div class="grid_2 navbar-item">
-        <a href="#" class="link">Books</a>
+        <a href="#" class="link">shelf</a>
     </div>
 
     {% if current_user.is_authenticated() %}
         <div class="grid_2 navbar-item">
-            <a href="#" class="link">Diary</a>
+            <a href="#" class="link">diary</a>
         </div>
         <div class="grid_4 push_3 navbar-in-out">    
-            <a href="{{ url_for('auth.Logout') }}" class="link">Sign Out</a>
+            <a href="{{ url_for('auth.Logout') }}" class="link">sign out</a>
             [{{ current_user.username }}]    
         </div>
     {% else %}
         <div class="grid_2 push_7 navbar-in-out">
-            <a href="{{ url_for('auth.Login') }}" class="link">Sign In</a>
+            <a href="{{ url_for('auth.Login') }}" class="link">sign in</a>
         </div>
     {% endif %}
 </div>

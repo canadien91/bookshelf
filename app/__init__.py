@@ -1,5 +1,3 @@
-# coding: utf-8
-
 from flask                  import Flask
 from flask                  import render_template
 
@@ -22,9 +20,11 @@ def create_app( config_name ):
     db.init_app( app )
     login_manager.init_app( app )
 
-    from .main import main as main_blueprint
-    from .auth import auth as auth_plueprint
+    from .main      import main     as main_blueprint
+    from .auth      import auth     as auth_blueprint
+    from .authors   import authors  as authors_blueprint
     app.register_blueprint( main_blueprint )
-    app.register_blueprint( auth_plueprint, url_prefix="/auth" )
+    app.register_blueprint( auth_blueprint, url_prefix="/auth" )
+    app.register_blueprint( authors_blueprint, url_prefix="/authors" )
 
     return app

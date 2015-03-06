@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Authors{% endblock %}
+
+{% block page_content %}
+
+<div class="grid_16">
+    <h3>Authors</h3>
+</div>
+
+<div class="grid_12">
+    Author's name
+</div>
+<div class="grid_4">
+    Author's publications
+</div>
+{% for author in a_list if not author.last_name == "Anonimous" %}
+    <div class="grid_12">
+        {{ author.last_name }}, {{ author.first_name }}
+        {% if author.second_name %}
+            {{ author.second_name }}
+        {% endif %}
+        {% if author.third_name %}
+            {{ author.third_name }}
+        {% endif %}
+    </div>
+    <div class="grid_4">
+        {{ author.publications|length }}
+    </div>
+{% endfor %}
+    
+{% endblock %}
