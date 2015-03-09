@@ -13,10 +13,13 @@ def Index():
         a_list=list_of_authors,
     )
 
-@authors.route( "/<pk>/" )
+@authors.route( "/<int:pk>/" )
 def Details( pk ):
     author = AnAuthor.query.get_or_404( pk )
+    publications = list(author.publications)
+    publications.sort(key=lambda x: x.added)
     return render_template(
         "authors/details.html",
         author=author,
+        publications=publications,
     )
