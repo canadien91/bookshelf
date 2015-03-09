@@ -12,3 +12,11 @@ def Index():
         "authors/authors.html",
         a_list=list_of_authors,
     )
+
+@authors.route( "/<pk>/" )
+def Details( pk ):
+    author = AnAuthor.query.get_or_404( pk )
+    return render_template(
+        "authors/details.html",
+        author=author,
+    )
