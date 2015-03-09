@@ -10,12 +10,12 @@ body {
     color: #006600;
 }
 
-.greentext{
-    color: #006600;
-}
-
 .greenlink:hover{
     color: #003300;
+}
+
+.greentext{
+    color: #006600;
 }
 
 .form-row{
@@ -119,13 +119,22 @@ div.info {
     font-style: italic;
 }
 
-.navbar-item{
+.navbar-item {
     text-align: center;
-    /*height:inherit;*/
     overflow: hidden;
 }
 
-.navbar-in-out{
+.navbar-in-out {
     text-align: right;
     overflow: hidden;
 }
+
+.publications {
+}
+
+.publications .header {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+

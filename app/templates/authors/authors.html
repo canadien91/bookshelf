@@ -15,13 +15,15 @@
 </div>
 {% for author in a_list if not author.last_name == "Anonimous" %}
     <div class="grid_12">
-        {{ author.last_name }}, {{ author.first_name }}
-        {% if author.second_name %}
-            {{ author.second_name }}
-        {% endif %}
-        {% if author.third_name %}
-            {{ author.third_name }}
-        {% endif %}
+        <a href="{{ url_for('authors.Details', pk=author.id) }}" class="greenlink">    
+            {% if author.id == 0 %}
+                {{ author.last_name }}
+            {% else %}
+                {{ author.last_name }}, {{ author.first_name }}
+                {{ author.second_name|default("", true) }}
+                {{ author.third_name|default("", true) }}
+            {% endif %}
+        </a>
     </div>
     <div class="grid_4">
         {{ author.publications|length }}

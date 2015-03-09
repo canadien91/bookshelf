@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}
+{% if author.id == 0 %}
+    {{ author.last_name }}
+{% else %}
+    {{ author.last_name }}, {{ author.first_name }}
+{% endif %}
+{% endblock %}
+
+{% block page_content %}
+<div class="grid_16">
+    <h3>
+        {% if author.id == 0 %}
+            {{ author.last_name }}
+        {% else %}
+            {{ author.last_name }}, {{ author.first_name }}
+            {{ author.second_name|default("", true) }}
+            {{ author.third_name|default("", true) }}
+        {% endif %}
+    </h3>
+</div>
+<div class="grid_12 alpha omega">
+    <div class="grid_2">
+        <span class="greentext"><b>BORN</b></span>
+    </div>
+    <div class="grid_9">
+        {{ author.birth_day }}
+    </div>
+    {% if author.death_day %}
+        <div class="grid_2">
+            <span class="greentext"><b>DIED</b></span>
+        </div>
+        <div class="grid_9">
+            {{ author.death_day }}
+        </div>
+    {% endif %}
+    {% if author.bio %}
+        <div class="grid_2">
+            <span class="greentext"><b>BIO</b></span>
+        </div>
+        <div class="grid_9">
+            {{ author.bio }}
+        </div>
+    {% endif %}
+</div>
+<div class="grid_4 alpha omega publications">
+    <div class="header greentext">publications</div>
+    {% for publication in author.publications %}
+        <div class="grid_4">
+            {{ publication.title }}
+        </div>
+    {% else %}
+        <div class="grid_4">
+            This author has no publications yet.
+        </div>     
+    {% endfor %}
+</div>
+
+{% endblock %}
