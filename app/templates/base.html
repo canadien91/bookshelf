@@ -12,9 +12,9 @@
     {% endblock %}
 </Head>
 
-<Body class="container_16">
+<Body>
 {% block navbar %}
-<div id="navbar">
+<div id="navbar" class="container_16">
     <div id="logo" class="grid_3">
         <a href="{{ url_for('main.Index') }}">[B]OOKSHELF</a>
     </div>
@@ -42,7 +42,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container_16">
         {% for message in get_flashed_messages() %}
             {{ message }}
         {% endfor %}

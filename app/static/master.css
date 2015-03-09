@@ -130,6 +130,8 @@ div.info {
 }
 
 .publications {
+    width: 240px;
+    float: right;
 }
 
 .publications .header {
@@ -138,3 +140,8 @@ div.info {
     font-weight: bold;
 }
 
+.details {
+    width: 720px;
+    height: auto;
+    float: left;
+}
