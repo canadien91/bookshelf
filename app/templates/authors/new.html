@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}New Author{% endblock %}
+
+{% block page_content %}
+
+<div class="grid_16">
+    <h3>New Author</h3>
+</div>
+
+<div class="grid_16 well">
+    <form method="Post" name="add-new-author">
+        {{ form.hidden_tag() }}
+        <div class="container_16 form-row">   
+            <div class="grid_3 {% if form.first_name.errors %}error{% endif %} label">
+                {{ form.first_name.label }}:                
+            </div>
+            <div class="grid_7">
+                {{ form.first_name }}
+            </div>
+            <div class="grid_6">
+                {% for error in form.first_name.errors %}
+                    <span class="error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container_16 form-row">   
+            <div class="grid_3 {% if form.second_name.errors %}error{% endif %} label">
+                {{ form.second_name.label }}:                
+            </div>
+            <div class="grid_7">
+                {{ form.second_name }}
+            </div>
+            <div class="grid_6">
+                {% for error in form.second_name.errors %}
+                    <span class="error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container_16 form-row">   
+            <div class="grid_3 {% if form.third_name.errors %}error{% endif %} label">
+                {{ form.third_name.label }}:                
+            </div>
+            <div class="grid_7">
+                {{ form.third_name }}
+            </div>
+            <div class="grid_6">
+                {% for error in form.third_name.errors %}
+                    <span class="error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container_16 form-row">   
+            <div class="grid_3 {% if form.last_name.errors %}error{% endif %} label">
+                {{ form.last_name.label }}:                
+            </div>
+            <div class="grid_7">
+                {{ form.last_name }}
+            </div>
+            <div class="grid_6">
+                {% for error in form.last_name.errors %}
+                    <span class="error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="container_16 form-row">   
+            <div class="grid_3 {% if form.birth_day.errors %}error{% endif %} label">
+                {{ form.birth_day.label }}:                
+            </div>
+            <div class="grid_7">
+                {{ form.birth_day }}
+            </div>
+            <div class="grid_6">
+                {% for error in form.birth_day.errors %}
+                    <span class="error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container_16 form-row">   
+            <div class="grid_3 {% if form.death_day.errors %}error{% endif %} label">
+                {{ form.death_day.label }}:                
+            </div>
+            <div class="grid_7">
+                {{ form.death_day }}
+            </div>
+            <div class="grid_6">
+                {% for error in form.death_day.errors %}
+                    <span class="error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="container_16 form-row">   
+            <div class="grid_3 {% if form.bio.errors %}error{% endif %} label">
+                {{ form.bio.label }}:                
+            </div>
+            <div class="grid_7">
+                {{ form.bio }}
+            </div>
+            <div class="grid_6">
+                {% for error in form.bio.errors %}
+                    <span class="error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container_16 form-row">
+            <div class="grid_3">{{ form.submit }}</div>
+        </div>
+    </form>
+</div>
+    
+{% endblock %}
