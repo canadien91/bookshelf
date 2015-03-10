@@ -1,8 +1,12 @@
-from flask      import render_template, redirect, url_for
+from flask              import render_template, redirect, url_for, flash
 
-from .          import authors
-# from ..         import db
-from ..models   import AnAuthor
+from flask.ext.login    import login_required
+
+from .                  import authors
+from .forms             import AnAuthorForm
+
+from ..                 import db
+from ..models           import AnAuthor
 
 @authors.route( "/" )
 def Index():
@@ -22,4 +26,32 @@ def Details( pk ):
         "authors/details.html",
         author=author,
         publications=publications,
+    )
+
+@authors.route( "/new/", methods=[ "GET", "POST" ] )
+@login_required
+def AddNewAuthor():
+    form = AnAuthorForm()
+    if form.validate_on_submit():
+        new_author              = AnAuthor()
+
+        new_author.first_name   = form.first_name.data
+        new_author.second_name  = form.second_name.data
+        new_author.third_name   = form.third_name.data
+        new_author.last_name    = form.last_name.data
+
+        new_author.birth_day    = form.birth_day.data
+        new_author.death_day    = form.death_day.data
+
+        new_author.bio          = form.bio.data
+
+        db.session.add( new_author )
+        db.session.commit()
+
+        flash( "You have successfully created a new author." )
+        return redirect( url_for( "authors.Details", pk=new_author.id ) )
+
+    return render_template(
+        "authors/new.html",
+        form=form,
     )
