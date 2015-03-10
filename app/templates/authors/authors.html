@@ -3,33 +3,38 @@
 
 {% block page_content %}
 
-<div class="container_16">
-    <div class="grid_16">
-        <h3>Authors</h3>
-    </div>
+<div class="grid_16">
+    <h3>Authors</h3>
+</div>
 
+<div class="grid_12">
+    Author's name
+</div>
+<div class="grid_4">
+    Author's publications
+</div>
+
+{% for author in a_list if not author.last_name == "Anonimous" %}
     <div class="grid_12">
-        Author's name
+        <a href="{{ url_for('authors.Details', pk=author.id) }}" class="greenlink">    
+            {% if author.id == 0 %}
+                {{ author.last_name }}
+            {% else %}
+                {{ author.last_name }}, {{ author.first_name }}
+                {{ author.second_name|default("", true) }}
+                {{ author.third_name|default("", true) }}
+            {% endif %}
+        </a>
     </div>
     <div class="grid_4">
-        Author's publications
+        {{ author.publications|length }}
     </div>
-    {% for author in a_list if not author.last_name == "Anonimous" %}
-        <div class="grid_12">
-            <a href="{{ url_for('authors.Details', pk=author.id) }}" class="greenlink">    
-                {% if author.id == 0 %}
-                    {{ author.last_name }}
-                {% else %}
-                    {{ author.last_name }}, {{ author.first_name }}
-                    {{ author.second_name|default("", true) }}
-                    {{ author.third_name|default("", true) }}
-                {% endif %}
-            </a>
-        </div>
-        <div class="grid_4">
-            {{ author.publications|length }}
-        </div>
-    {% endfor %}
-</div>
+{% endfor %}
+
+{% if current_user.is_authenticated() %}
+    <div class="grid_16">
+        You can add new author <a href="{{ url_for('authors.AddNewAuthor') }}" class="greenlink">here</a>.
+    </div>
+{% endif %}
     
 {% endblock %}

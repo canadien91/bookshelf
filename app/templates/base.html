@@ -44,10 +44,12 @@
 {% block content %}
     <div class="container_16">
         {% for message in get_flashed_messages() %}
-            {{ message }}
+            <div class="grid_16">
+                {{ message }}
+            </div>
         {% endfor %}
-    </div>
     {% block page_content %}{% endblock %}
+    </div>
 {% endblock %}
 
 </Body>

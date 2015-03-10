@@ -8,54 +8,58 @@
 {% endblock %}
 
 {% block page_content %}
-<div class="container_16">
-    <div class="grid_16">
-        <h3>
-            {% if author.id == 0 %}
-                {{ author.last_name }}
-            {% else %}
-                {{ author.last_name }}, {{ author.first_name }}
-                {{ author.second_name|default("", true) }}
-                {{ author.third_name|default("", true) }}
-            {% endif %}
-        </h3>
+
+<div class="grid_16">
+    <h3>
+        {% if author.id == 0 %}
+            {{ author.last_name }}
+        {% else %}
+            {{ author.last_name }}, {{ author.first_name }}
+            {{ author.second_name|default("", true) }}
+            {{ author.third_name|default("", true) }}
+        {% endif %}
+    </h3>
+</div>
+<div class="details">
+    <div class="grid_2">
+        <span class="greentext"><b>BORN</b></span>
     </div>
-    <div class="details">
+    <div class="grid_10">
+        {{ author.birth_day }}
+    </div>
+    {% if author.death_day %}
         <div class="grid_2">
-            <span class="greentext"><b>BORN</b></span>
+            <span class="greentext"><b>DIED</b></span>
         </div>
         <div class="grid_10">
-            {{ author.birth_day }}
+            {{ author.death_day }}
         </div>
-        {% if author.death_day %}
-            <div class="grid_2">
-                <span class="greentext"><b>DIED</b></span>
-            </div>
-            <div class="grid_10">
-                {{ author.death_day }}
-            </div>
-        {% endif %}
-        {% if author.bio %}
-            <div class="grid_2">
-                <span class="greentext"><b>BIO</b></span>
-            </div>
-            <div class="grid_10">
-                {{ author.bio }}
-            </div>
-        {% endif %}
-    </div>
-    <div class="publications">
-        <div class="header greentext">publications</div>
-        {% for publication in publications %}
-            <div class="grid_4">
-                {{ publication.title }}
-            </div>
-        {% else %}
-            <div class="grid_4">
-                This author has no publications yet.
-            </div>     
-        {% endfor %}
-    </div>
+    {% endif %}
+    {% if author.bio %}
+        <div class="grid_2">
+            <span class="greentext"><b>BIO</b></span>
+        </div>
+        <div class="grid_10">
+            {{ author.bio }}
+        </div>
+    {% endif %}
 </div>
+<div class="publications">
+    <div class="header greentext">publications</div>
+    {% for publication in publications %}
+        <div class="grid_4">
+            {{ publication.title }}
+        </div>
+    {% else %}
+        <div class="grid_4">
+            This author has no publications yet.
+        </div>     
+    {% endfor %}
+</div>
+{% if current_user.is_authenticated() %}
+<div class="grid_16">
+    You can add new author <a href="{{ url_for('authors.AddNewAuthor') }}" class="greenlink">here</a>.
+</div>
+{% endif %}
 
 {% endblock %}
