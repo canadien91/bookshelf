@@ -1,4 +1,5 @@
-from flask              import render_template, redirect, url_for, flash
+from flask              import render_template, redirect 
+from flask              import url_for, flash
 
 from flask.ext.login    import login_required
 
@@ -7,6 +8,8 @@ from .forms             import AnAuthorForm
 
 from ..                 import db
 from ..models           import AnAuthor
+
+from .utils import FillAnAuthorForm
 
 @authors.route( "/" )
 def Index():
@@ -53,5 +56,33 @@ def AddNewAuthor():
 
     return render_template(
         "authors/new.html",
+        form=form,
+    )
+
+@authors.route( "/<int:pk>/edit/", methods=[ "GET", "POST" ] )
+@login_required
+def EditAuthor( pk ):
+    author  = AnAuthor.query.get_or_404( pk )
+    form    = AnAuthorForm()
+    if form.validate_on_submit():
+        author.first_name   = form.first_name.data
+        author.second_name  = form.second_name.data
+        author.third_name   = form.third_name.data
+        author.last_name    = form.last_name.data
+
+        author.birth_day    = form.birth_day.data
+        author.death_day    = form.death_day.data
+
+        author.bio          = form.bio.data
+
+        db.session.add( author )
+        db.session.commit()
+
+        flash( "You have successfully updated author." )
+        return redirect( url_for( "authors.Details", pk=author.id ) )
+
+    FillAnAuthorForm( pk, form )
+    return render_template(
+        "authors/edit.html",
         form=form,
     )

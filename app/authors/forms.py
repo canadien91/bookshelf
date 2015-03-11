@@ -1,6 +1,6 @@
 from flask.ext.wtf      import Form
 from wtforms            import StringField, SubmitField, DateField, TextAreaField
-from wtforms.validators import Required, Length
+from wtforms.validators import Required, Length, Optional
 
 class AnAuthorForm( Form ):
     first_name  = StringField( "First Name", validators=[ Required(), Length( 3, 64 ) ] )
@@ -9,8 +9,8 @@ class AnAuthorForm( Form ):
     last_name   = StringField( "Last Name", validators=[ Required(), Length( 3, 64 ) ] )
 
     birth_day   = DateField( "Birth Day", validators=[ Required() ] )
-    death_day   = DateField( "Death Day" )
+    death_day   = DateField( "Death Day", validators=[ Optional() ] )
 
     bio         = TextAreaField( "Bio" )
 
-    submit      = SubmitField( "Create" )
+    submit      = SubmitField( "Submit" )
