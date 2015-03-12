@@ -9,7 +9,7 @@ from .forms             import AnAuthorForm
 from ..                 import db
 from ..models           import AnAuthor
 
-from .utils import FillAnAuthorForm
+from .utils             import FillAnAuthorForm
 
 @authors.route( "/" )
 def Index():
@@ -86,3 +86,12 @@ def EditAuthor( pk ):
         "authors/edit.html",
         form=form,
     )
+
+@authors.route( "/<int:pk>/delete/" )
+@login_required
+def Delete( pk ):
+    author = AnAuthor.query.get_or_404( pk )
+    db.session.delete( author )
+    db.session.commit()
+    flash( "You have successfully deleted author." )
+    return redirect( url_for( "authors.Index" ) )    
