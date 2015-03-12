@@ -7,15 +7,15 @@
     <h3>Authors</h3>
 </div>
 
-<div class="grid_12">
-    Author's name
+<div class="grid_12 pseudo-table-header">
+    <b>Author's name</b>
 </div>
-<div class="grid_4">
-    Author's publications
+<div class="grid_4 pseudo-table-header">
+    <b>Publications</b>
 </div>
 
 {% for author in a_list if not author.last_name == "Anonimous" %}
-    <div class="grid_12">
+    <div class="{% if current_user.is_authenticated() %}grid_10{% else %}grid_12{% endif %}">
         <a href="{{ url_for('authors.Details', pk=author.id) }}" class="greenlink">    
             {% if author.id == 0 %}
                 {{ author.last_name }}
@@ -26,13 +26,25 @@
             {% endif %}
         </a>
     </div>
-    <div class="grid_4">
+    {% if current_user.is_authenticated() %}       
+    <div class="grid_1">
+        <a href="{{ url_for('authors.EditAuthor', pk=author.id) }}" class="greenlink">
+            edit
+        </a>
+    </div>
+    <div class="grid_1">
+        <a href="{{ url_for('authors.Delete', pk=author.id) }}" class="greenlink">
+            delete
+        </a>
+    </div>
+    {% endif %}
+    <div class="grid_4 author-index-publications">
         {{ author.publications|length }}
     </div>
 {% endfor %}
 
 {% if current_user.is_authenticated() %}
-    <div class="grid_16">
+    <div class="grid_16 add-new-author">
         You can add new author <a href="{{ url_for('authors.AddNewAuthor') }}" class="greenlink">here</a>.
     </div>
 {% endif %}

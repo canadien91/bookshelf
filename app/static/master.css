@@ -34,11 +34,6 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus{
     border-color: #006600;
 }
 
-textarea{
-    cols:20;
-    wrap:hard;
-}
-
 input[type=submit]{
     width: inherit;
     border-radius: 0px;
@@ -142,16 +137,42 @@ div.info {
 .publications {
     width: 240px;
     float: right;
+    text-align: center;
+    padding-bottom: 5px;
 }
 
 .publications .header {
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.publications .entry {
+    padding-bottom: 5px;
 }
 
 .details {
     width: 720px;
     height: auto;
     float: left;
+}
+
+.edlinks {
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+.add-new-author {
+    padding-top: 10px;
+}
+
+.author-index-publications {
+    text-align: center;
+}
+
+.pseudo-table-header {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 5px;
 }
