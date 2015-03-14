@@ -176,3 +176,8 @@ div.info {
     font-weight: bold;
     padding-bottom: 5px;
 }
+
+.publications-index .publication {
+    text-align: center;
+    padding-bottom: 10px;
+}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Publications{% endblock %}
+
+{% block page_content %}
+
+<div class="grid_16">
+    <h3>Publications</h3>
+</div>
+
+<div class="grid_13 publications-index">
+{% for pub in publications %}    
+    <div class="publication">
+        <div class="title">
+            {{ pub.title }}
+        </div>
+        by
+        <div class="authors">
+            {% for author in pub.authors %}
+            <a href="{{ url_for('authors.Details', pk=author.id) }}" class="greenlink">    
+                {% if author.id == 0 %}
+                    {{ author.last_name }}
+                {% else %}
+                    {{ author.last_name }}, {{ author.first_name }}
+                    {{ author.second_name|default("", true) }}
+                    {{ author.third_name|default("", true) }}
+                {% endif %} <br>
+            </a>
+            {% else %}
+                Unknown author
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+<div class="grid_3">
+    Place for advertising
+</div>
+{% endblock %}

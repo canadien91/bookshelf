@@ -22,7 +22,7 @@
         <a href="{{ url_for('authors.Index') }}" class="link">authors</a>
     </div>
     <div class="grid_2 navbar-item">
-        <a href="#" class="link">shelf</a>
+        <a href="{{ url_for('publications.Index') }}" class="link">shelf</a>
     </div>
 
     {% if current_user.is_authenticated() %}
