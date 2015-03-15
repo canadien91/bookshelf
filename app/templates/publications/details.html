@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}{{ publication.title }}{% endblock %}
+
+{% block page_content %}
+
+<div class="grid_16">
+    <h3>{{ publication.title }}</h3>
+</div>
+
+{% if current_user.is_authenticated() %}
+    <div class="edlinks grid_16">
+        <a href="#" class="greenlink">edit</a> |
+        <a href="#" class="greenlink">delete</a>
+    </div>
+{% endif %}
+
+<div class="details">
+    <div class="grid_2">
+        <b><span class="greentext">Written by:</span></b>
+    </div>
+    <div class="grid_10">
+        {% for author in publication.authors %}
+            <a href="{{ url_for('authors.Details', pk=author.id) }}" class="greenlink">    
+                {% if author.id == 0 %}
+                    {{ author.last_name }}
+                {% else %}
+                    {{ author.first_name }}
+                    {{ author.second_name|default("", true) }}
+                    {{ author.third_name|default("", true) }}
+                    {{ author.last_name }}
+                {% endif %} <br>
+            </a>
+            {% else %}
+                Unknown author
+            {% endfor %}
+    </div>
+{% if publication.annotation %}
+    <div class="grid_2">
+        <b><span class="greentext">Annotation:</span></b>
+    </div>
+    <div class="grid_10">
+        {{ publication.annotation }}
+    </div>
+{% endif %}
+</div>
+<div class="grid_4">
+    <b>Place for advertising</b> <br>
+    What makes a real American? A cowboy hat? Enjoying a fine T-bone steak? Going to a baseball game? Shooting a gun? Maybe it’s the freedom to go into a poor country and tell them how to do things?! Heh! Those are all great qualities! But one thing that makes a true patriot is the ability to choose an American car! When you buy an import you take a hot meal off a hard working American’s table. (Baby cries) There, there! This poor girl is going to starve to death, just because you bought a cheaper, more efficient Maibazu.
+</div>
+{% if current_user.is_authenticated() %}
+<div class="grid_16 add-new-author">
+    You can add new publication <a href="#" class="greenlink">here</a>.
+</div>
+{% endif %}
+
+
+{% endblock %}

@@ -12,7 +12,9 @@
 {% for pub in publications %}    
     <div class="publication">
         <div class="title">
-            {{ pub.title }}
+            <a href="{{ url_for('publications.Details', pk=pub.id) }}" class="greenlink">
+                <b>{{ pub.title }}</b>    
+            </a>
         </div>
         by
         <div class="authors">

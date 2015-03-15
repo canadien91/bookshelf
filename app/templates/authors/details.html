@@ -56,7 +56,9 @@
     <div class="header greentext">publications</div>
     {% for publication in publications %}
         <div class="grid_4 entry">
-            {{ publication.title }}
+            <a href="{{ url_for('publications.Details', pk=publication.id) }}" class="greenlink">
+                {{ publication.title }}
+            </a>
         </div>
     {% else %}
         <div class="grid_4">
