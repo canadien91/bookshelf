@@ -4,8 +4,10 @@ from flask.ext.login    import login_required
 
 from .                  import publications
 from ..                 import db
-from .forms             import APublicationForm
 from ..models           import APublication
+
+from .forms             import APublicationForm
+from .utils             import FillAPublicationForm
 
 @publications.route( "/" )
 def Index():
@@ -23,7 +25,7 @@ def Details( pk ):
         publication=publication,
     )
 
-@publications.route( "/new/", methods=["GET", "POST"])
+@publications.route( "/new/", methods=[ "GET", "POST" ] )
 @login_required
 def AddNew():
     form = APublicationForm()
@@ -35,8 +37,28 @@ def AddNew():
         db.session.add( new_publication )
         db.session.commit()
 
-        return redirect(url_for("publications.Details", pk=new_publication.id))
+        return redirect( url_for( "publications.Details", pk=new_publication.id ) )
     return render_template(
         "publications/new.html",
         form=form,
+    )
+
+@publications.route( "/<int:pk>/edit/", methods=[ "GET", "POST" ] )
+@login_required
+def Edit( pk ):
+    form        = APublicationForm()
+    publication = APublication.query.get_or_404( pk )
+    if form.validate_on_submit():
+        publication.title       = form.title.data
+        publication.annotation  = form.annotation.data
+
+        db.session.add( publication )
+        db.session.commit()
+
+        return redirect( url_for( "publications.Details", pk=publication.id ) )
+
+    FillAPublicationForm( pk, form, publication )
+    return render_template(
+        "publications/edit.html",
+        form=form
     )
