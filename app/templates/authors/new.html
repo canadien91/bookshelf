@@ -12,8 +12,8 @@
 <div class="grid_16 well">
     <form method="Post" name="add-new-author">
         {{ form.hidden_tag() }}
-        <div class="container_16 form-row">   
-            <div class="grid_3 {% if form.first_name.errors %}error{% endif %} label">
+        <div class="container_16 form-row {% if form.first_name.errors %}error{% endif %}">   
+            <div class="grid_3 label">
                 {{ form.first_name.label }}:                
             </div>
             <div class="grid_7">
@@ -25,8 +25,8 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="container_16 form-row">   
-            <div class="grid_3 {% if form.second_name.errors %}error{% endif %} label">
+        <div class="container_16 form-row {% if form.second_name.errors %}error{% endif %}">   
+            <div class="grid_3 label">
                 {{ form.second_name.label }}:                
             </div>
             <div class="grid_7">
@@ -38,8 +38,8 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="container_16 form-row">   
-            <div class="grid_3 {% if form.third_name.errors %}error{% endif %} label">
+        <div class="container_16 form-row {% if form.third_name.errors %}error{% endif %}">   
+            <div class="grid_3 label">
                 {{ form.third_name.label }}:                
             </div>
             <div class="grid_7">
@@ -51,8 +51,8 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="container_16 form-row">   
-            <div class="grid_3 {% if form.last_name.errors %}error{% endif %} label">
+        <div class="container_16 form-row {% if form.last_name.errors %}error{% endif %}">   
+            <div class="grid_3 label">
                 {{ form.last_name.label }}:                
             </div>
             <div class="grid_7">
@@ -65,8 +65,8 @@
             </div>
         </div>
         <br>
-        <div class="container_16 form-row">   
-            <div class="grid_3 {% if form.birth_day.errors %}error{% endif %} label">
+        <div class="container_16 form-row {% if form.birth_day.errors %}error{% endif %}">   
+            <div class="grid_3 label">
                 {{ form.birth_day.label }}:                
             </div>
             <div class="grid_7">
@@ -78,8 +78,8 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="container_16 form-row">   
-            <div class="grid_3 {% if form.death_day.errors %}error{% endif %} label">
+        <div class="container_16 form-row {% if form.death_day.errors %}error{% endif %}">   
+            <div class="grid_3 label">
                 {{ form.death_day.label }}:                
             </div>
             <div class="grid_7">
@@ -92,8 +92,8 @@
             </div>
         </div>
         <br>
-        <div class="container_16 form-row">   
-            <div class="grid_3 {% if form.bio.errors %}error{% endif %} label">
+        <div class="container_16 form-row {% if form.bio.errors %}error{% endif %}">   
+            <div class="grid_3 label">
                 {{ form.bio.label }}:                
             </div>
             <div class="grid_7">

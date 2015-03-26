@@ -11,8 +11,8 @@
 <div class="grid_16 well">
     <form method="post" name="login">
         {{ form.hidden_tag() }}
-        <div class="container_16 form-row">   
-            <div class="grid_2 {% if form.username.errors %}error{% endif %}">
+        <div class="container_16 form-row {% if form.username.errors %}error{% endif %}">   
+            <div class="grid_2">
                 Username:                
             </div>
             <div class="grid_7">
@@ -24,8 +24,8 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="container_16 form-row">
-            <div class="grid_2 {% if form.password.errors %}error{% endif %}">
+        <div class="container_16 form-row {% if form.password.errors %}error{% endif %}">
+            <div class="grid_2">
                 Password:                
             </div>
             <div class="grid_7">

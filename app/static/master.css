@@ -61,6 +61,10 @@ input[type=submit]:hover{
     color: #7A0000;
 }
 
+.error input[type=text], .error input[type=password]{
+    border-color: #7A0000;
+}
+
 .label{
     text-align: right;
 }
