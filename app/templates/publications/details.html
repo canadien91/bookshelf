@@ -50,7 +50,7 @@
 </div>
 {% if current_user.is_authenticated() %}
 <div class="grid_16 add-new-author">
-    You can add new publication <a href="#" class="greenlink">here</a>.
+    You can add new publication <a href="{{ url_for('publications.AddNew') }}" class="greenlink">here</a>.
 </div>
 {% endif %}
 
