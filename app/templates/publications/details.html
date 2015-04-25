@@ -10,8 +10,8 @@
 
 {% if current_user.is_authenticated() %}
     <div class="edlinks grid_16">
-        <a href="{{ url_for('publications.Edit', pk=publication.id)}}" class="greenlink">edit</a> |
-        <a href="#" class="greenlink">delete</a>
+        <a href="{{ url_for('publications.Edit', pk=publication.id) }}" class="greenlink">edit</a> |
+        <a href="{{ url_for('publications.Delete', pk=publication.id) }}" class="greenlink">delete</a>
     </div>
 {% endif %}
 

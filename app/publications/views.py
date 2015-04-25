@@ -1,4 +1,4 @@
-from flask              import render_template, url_for, redirect
+from flask              import render_template, url_for, redirect, flash
 
 from flask.ext.login    import login_required
 
@@ -62,3 +62,12 @@ def Edit( pk ):
         "publications/edit.html",
         form=form
     )
+
+@publications.route( "/<int:pk>/delete/" )
+@login_required
+def Delete(pk):
+    pub = APublication.query.get_or_404( pk )
+    db.session.delete( pub )
+    db.session.commit()
+
+    return redirect( url_for( "publications.Index" ) )

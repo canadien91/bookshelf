@@ -64,12 +64,33 @@ class AnAuthor( db.Model ):
     publications    = db.relationship(
         "APublication",
         secondary=authorship,
-        backref=db.backref( "authors", lazy="dynamic" )
+        backref=db.backref( "authors", lazy="dynamic" ),
+        passive_deletes=True,
+        lazy="dynamic",
     )
 
     def __repr__( self ):
         return "<Author %s. %s>" % ( self.first_name[ 0 ], self.last_name )
 
+    def AddPublication( self, pk=0 ):
+        assert type(pk) == int
+        pub = APublication.query.get_or_404(pk)
+        assert pub not in self.publications
+        self.publications.append(pub)
+        
+        db.session.add(self)
+        db.session.commit()
+
+    def RemovePublication(self, pk=0):
+        assert type(pk) == int
+        pub = APublication.query.get_or_404(pk)
+        print(type(pub))
+        assert pub in self.publications
+
+        self.publications.remove(pub)
+
+        db.session.add(self)
+        db.session.commit()
 
 class APublication( db.Model ):
     __tablename__   = "publications"
