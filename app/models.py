@@ -1,3 +1,4 @@
+
 from datetime           import datetime
 
 from flask.ext.login    import UserMixin
@@ -66,7 +67,6 @@ class AnAuthor( db.Model ):
         secondary=authorship,
         backref=db.backref( "authors", lazy="dynamic" ),
         passive_deletes=True,
-        lazy="dynamic",
     )
 
     def __repr__( self ):
@@ -76,20 +76,21 @@ class AnAuthor( db.Model ):
         assert type(pk) == int
         pub = APublication.query.get_or_404(pk)
         assert pub not in self.publications
-        self.publications.append(pub)
+        self.publications.append( pub )
         
-        db.session.add(self)
+        db.session.add( self )
+        db.session.add( pub )
         db.session.commit()
 
-    def RemovePublication(self, pk=0):
-        assert type(pk) == int
+    def RemovePublication( self, pk=0 ):
+        assert type( pk ) == int
         pub = APublication.query.get_or_404(pk)
-        print(type(pub))
         assert pub in self.publications
 
-        self.publications.remove(pub)
-
-        db.session.add(self)
+        self.publications.remove( pub )
+        
+        db.session.add( self )
+        db.session.add( pub )
         db.session.commit()
 
 class APublication( db.Model ):
