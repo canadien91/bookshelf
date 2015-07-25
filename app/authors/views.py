@@ -1,3 +1,4 @@
+
 from flask              import render_template, redirect 
 from flask              import url_for, flash
 
@@ -5,7 +6,6 @@ from flask.ext.login    import login_required
 
 from .                  import authors
 from .forms             import AnAuthorForm
-
 from ..                 import db
 from ..models           import AnAuthor
 
@@ -22,9 +22,9 @@ def Index():
 
 @authors.route( "/<int:pk>/" )
 def Details( pk ):
-    author = AnAuthor.query.get_or_404( pk )
-    publications = list(author.publications)
-    publications.sort(key=lambda x: x.added)
+    author          = AnAuthor.query.get_or_404( pk )
+    publications    = list( author.publications )
+    publications.sort( key=lambda x: x.added )
     return render_template(
         "authors/details.html",
         author=author,
@@ -94,4 +94,4 @@ def Delete( pk ):
     db.session.delete( author )
     db.session.commit()
     flash( "You have successfully deleted author." )
-    return redirect( url_for( "authors.Index" ) )    
+    return redirect( url_for( "authors.Index" ) )

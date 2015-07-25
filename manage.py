@@ -2,13 +2,18 @@
 
 import os
 
-from app                import create_app, db
-from app.models         import AnUser, ARole, AnAuthor, APublication
+from app                        import create_app, db
+from app.models                 import AnUser, ARole, AnAuthor, APublication
 
-from flask.ext.script   import Manager, Shell
-from flask.ext.migrate  import Migrate, MigrateCommand
+from flask.ext.script           import Manager, Shell
+from flask.ext.migrate          import Migrate, MigrateCommand
+from flask_admin                import Admin
+from flask_admin.contrib.sqla   import ModelView
 
 app     = create_app( os.getenv( "FLASK_CONFIG" ) or "default" )
+admin   = Admin( app, name="Bookshelf" )
+admin.add_view( ModelView( AnAuthor, db.session ) )
+admin.add_view( ModelView( APublication, db.session ) )
 manager = Manager( app )
 migrate = Migrate( app, db )
 

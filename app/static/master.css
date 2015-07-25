@@ -1,3 +1,4 @@
+
 body {
     color: black;
     font-size: 15px;
@@ -6,23 +7,23 @@ body {
     text-align: justify;
 }
 
-.greenlink{
+.greenlink {
     color: #006600;
 }
 
-.greenlink:hover{
+.greenlink:hover {
     color: #003300;
 }
 
-.greentext{
+.greentext {
     color: #006600;
 }
 
-.form-row{
+.form-row {
     margin-bottom: 5px;
 }
 
-input[type=text], input[type=password], textarea{
+input[type=text], input[type=password], textarea {
     width:inherit;
     border-radius: 0px;
     border-style: solid;
@@ -30,11 +31,11 @@ input[type=text], input[type=password], textarea{
     border-color: #C4C4C4;
 }
 
-input[type=text]:focus, input[type=password]:focus, textarea:focus{
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
     border-color: #006600;
 }
 
-input[type=submit]{
+input[type=submit] {
     width: inherit;
     border-radius: 0px;
     border-style: solid;
@@ -43,13 +44,13 @@ input[type=submit]{
     height: 25px;
 }
 
-input[type=submit]:hover{
+input[type=submit]:hover {
     border-color: #006600;
     color: #006600;
     background-color: #CCF5CC;
 }
 
-.well{
+.well {
     background-color: #F5F5F5;
     padding-top: 10px;
     border-style: solid;
@@ -57,15 +58,15 @@ input[type=submit]:hover{
     border-color: #C4C4C4;
 }
 
-.error{
+.error {
     color: #7A0000;
 }
 
-.error input[type=text], .error input[type=password]{
+.error input[type=text], .error input[type=password] {
     border-color: #7A0000;
 }
 
-.label{
+.label {
     text-align: right;
 }
 
@@ -84,11 +85,11 @@ input[type=submit]:hover{
     text-decoration: none;
 }
 
-#logo a:hover{
+#logo a:hover {
     color: #006600;
 }
 
-#navbar .link{
+#navbar .link {
     color: black;
     font-size: 15px;
     font-weight: bold;
@@ -96,11 +97,11 @@ input[type=submit]:hover{
     text-transform: uppercase;
 }
 
-#navbar .link:hover{
+#navbar .link:hover {
     color: #006600;
 }
 
-#navbar .sign-in-out{
+#navbar .sign-in-out {
     overflow: hidden;
     height: inherit;
 }
